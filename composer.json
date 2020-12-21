@@ -1,13 +1,13 @@
 {
-  "name": "ytake/php-presto-client",
+  "name": "sonnyyou/php-presto-client",
   "description": "php prestodb client",
   "minimum-stability": "stable",
   "keywords": ["prestodb"],
   "license": "BSD-3-Clause",
   "authors": [
     {
-      "name": "yuuki takezawa",
-      "email": "yuuki.takezawa@comnect.jp.net"
+      "name": "Sonny You",
+      "email": "wunjheng.you@gmail.com"
     }
   ],
   "require": {
