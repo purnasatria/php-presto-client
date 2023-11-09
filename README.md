@@ -1,4 +1,4 @@
-# Ytake\PrestoClient
+# SonnyYou\PrestoClient
 
 [![Build Status](http://img.shields.io/travis/ytake/php-presto-client/master.svg?style=flat-square)](https://travis-ci.org/ytake/php-presto-client)
 [![Coverage Status](http://img.shields.io/coveralls/ytake/php-presto-client/master.svg?style=flat-square)](https://coveralls.io/r/ytake/php-presto-client?branch=master)
@@ -24,7 +24,7 @@ Presto is an open source distributed SQL query engine for running interactive an
 *required >= PHP 7.0*
 
 ```bash
-$ composer require ytake/php-presto-client
+$ composer require sonnyyou/php-presto-client
 ```
 
 ## Usage
@@ -34,8 +34,8 @@ $ composer require ytake/php-presto-client
 ```php
 <?php
 
-$client = new \Ytake\PrestoClient\StatementClient(
-    new \Ytake\PrestoClient\ClientSession('http://localhost:8080/', 'acme'),
+$client = new \SonnyYou\PrestoClient\StatementClient(
+    new \SonnyYou\PrestoClient\ClientSession('http://localhost:8080/', 'acme'),
     'SELECT * FROM acme.acme.acme'
 );
 // execute http request
@@ -43,7 +43,7 @@ $client->execute();
 // next call uri
 $client->advance();
 
-/** @var \Ytake\PrestoClient\QueryResult $result */
+/** @var \SonnyYou\PrestoClient\QueryResult $result */
 // current result
 $result = $client->current();
 
@@ -56,11 +56,11 @@ $client->cancelLeafStage();
 ```php
 <?php
 
-$client = new \Ytake\PrestoClient\StatementClient(
-    new \Ytake\PrestoClient\ClientSession('http://localhost:8080/', 'acme'),
+$client = new \SonnyYou\PrestoClient\StatementClient(
+    new \SonnyYou\PrestoClient\ClientSession('http://localhost:8080/', 'acme'),
     'SELECT * FROM acme.acme.acme'
 );
-$resultSession = new \Ytake\PrestoClient\ResultsSession($client);
+$resultSession = new \SonnyYou\PrestoClient\ResultsSession($client);
 // yield results instead of returning them. Recommended.
 $result = $resultSession->execute()->yieldResults();
 
@@ -75,16 +75,16 @@ $result = $resultSession->execute()->getResults();
 ```php
 <?php
 
-$client = new \Ytake\PrestoClient\StatementClient(
-    new \Ytake\PrestoClient\ClientSession('http://localhost:8080/', 'acme'),
+$client = new \SonnyYou\PrestoClient\StatementClient(
+    new \SonnyYou\PrestoClient\ClientSession('http://localhost:8080/', 'acme'),
     'SELECT * FROM acme.acme.acme'
 );
-$resultSession = new \Ytake\PrestoClient\ResultsSession($client);
+$resultSession = new \SonnyYou\PrestoClient\ResultsSession($client);
 $result = $resultSession->execute()->yieldResults();
-/** @var \Ytake\PrestoClient\QueryResult $row */
+/** @var \SonnyYou\PrestoClient\QueryResult $row */
 foreach ($result as $row) {
     foreach ($row->yieldData() as $yieldRow) {
-        if ($yieldRow instanceof \Ytake\PrestoClient\FixData) {
+        if ($yieldRow instanceof \SonnyYou\PrestoClient\FixData) {
             var_dump($yieldRow->offsetGet('column_name'), $yieldRow['column_name']);
         }
     }
@@ -96,13 +96,13 @@ foreach ($result as $row) {
 ```php
 <?php
 
-$client = new \Ytake\PrestoClient\StatementClient(
-    new \Ytake\PrestoClient\ClientSession('http://localhost:8080/', 'acme'),
+$client = new \SonnyYou\PrestoClient\StatementClient(
+    new \SonnyYou\PrestoClient\ClientSession('http://localhost:8080/', 'acme'),
     'SELECT * FROM acme.acme.acme'
 );
-$resultSession = new \Ytake\PrestoClient\ResultsSession($client);
+$resultSession = new \SonnyYou\PrestoClient\ResultsSession($client);
 $result = $resultSession->execute()->yieldResults();
-/** @var \Ytake\PrestoClient\QueryResult $row */
+/** @var \SonnyYou\PrestoClient\QueryResult $row */
 foreach ($result as $row) {
     /** @var array $item */
     foreach ($row->yieldDataArray() as $item) {
@@ -125,13 +125,13 @@ class Testing
     private $_value;
 }
 
-$client = new \Ytake\PrestoClient\StatementClient(
-    new \Ytake\PrestoClient\ClientSession('http://localhost:8080/', 'acme'),
+$client = new \SonnyYou\PrestoClient\StatementClient(
+    new \SonnyYou\PrestoClient\ClientSession('http://localhost:8080/', 'acme'),
     'SELECT * FROM acme.acme.acme'
 );
-$resultSession = new \Ytake\PrestoClient\ResultsSession($client);
+$resultSession = new \SonnyYou\PrestoClient\ResultsSession($client);
 $result = $resultSession->execute()->yieldResults();
-/** @var \Ytake\PrestoClient\QueryResult $row */
+/** @var \SonnyYou\PrestoClient\QueryResult $row */
 foreach ($result as $row) {
     foreach($row->yieldObject(Testing::class) as $object) {
         if ($object instanceof Testing) {
