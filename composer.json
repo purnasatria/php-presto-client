@@ -1,5 +1,5 @@
 {
-  "name": "ytake/php-presto-client",
+  "name": "purnasatria/php-presto-client",
   "description": "php prestodb client",
   "minimum-stability": "stable",
   "keywords": ["prestodb"],
